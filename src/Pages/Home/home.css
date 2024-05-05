@@ -1,0 +1,12 @@
+
+
+.catalogo_itens {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 30px;
+    margin-top:10px ;
+    justify-content: flex-start;
+    padding: 0px 15px;
+}

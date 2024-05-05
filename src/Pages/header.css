@@ -1,0 +1,42 @@
+
+a{
+    text-decoration: none;
+    background-color: transparent;
+    color: black;
+}
+
+li {
+    color: black;
+    list-style: none;
+}
+
+header {
+    background-color: #1c3454;
+}
+
+.container {
+    display: flex;
+    justify-content:flex-start;
+    border: 1px solid white;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: start;
+    background-color: aliceblue;
+}
+
+.link {
+    display: block;
+    padding: 5px;
+}
+
+
+
+.logo {
+    width: 200px;
+}
+
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}

@@ -1,0 +1,10 @@
+
+.principal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: wrap;
+    margin: 30px;
+    color: aliceblue;
+
+}
