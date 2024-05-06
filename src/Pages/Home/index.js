@@ -8,24 +8,19 @@ function Home () {
     return (
         <div className="body">
             <Header/>
-            
-            <div className="catalogo_itens">
-                <Product_card/>
-                <Product_card/>
-                <Product_card/>
-                <Product_card/>
-                <Product_card/>
-                <Product_card/>
-                <Product_card/>
-                <Product_card/>
-                <Product_card/>
-                <Product_card/>
-                <Product_card/>
-                <Product_card/>
-                <Product_card/>
+            <section className="section">   
+                <div className="catalogo_itens">
+                    <Product_card/>
+                    <Product_card/>
+                    <Product_card/>
+                    <Product_card/>
+                    <Product_card/>
+                    <Product_card/>
+                    <Product_card/>
+                    <Product_card/>
 
-            </div>
-
+                </div>
+            </section> 
         </div>
     )
 }
