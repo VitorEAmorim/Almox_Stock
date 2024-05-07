@@ -1,23 +1,46 @@
-import React, { Component } from 'react';
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import "./card.css";
-
+import { db } from '../../firebase';
+import { collection, getDocs } from "firebase/firestore";
 
 const Product_card = () => {
-    const [item] = useState({ name: 'Caneta', description: "Teste description", imagem:"https://img.kalunga.com.br/fotosdeprodutos/176072z_1.jpg" });
-    return(
-        <div className='card'>
-                <div className='product_card'>
-                    <a src="#"><img src = {item.imagem} className='logo'/></a>
-                    <h2>{item.name}</h2>
-                    <p>{item.description}</p>
-                    <footer className='add_item'>
-                        <span>Adicionar item</span>
-                    </footer>
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const itemsCollection = collection(db, 'itens');
+                const querySnapshot = await getDocs(itemsCollection);
+                const itemsData = [];
+                querySnapshot.forEach(doc => {
+                    itemsData.push({ id: doc.id, ...doc.data() });
+                });
+                setItems(itemsData);
+                console.log("Itens carregados", itemsData);
+            } catch (error) {
+                console.error('Erro ao obter os dados dos itens:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    return (
+        <div>
+            {items.map(item => (
+                <div className='card' key={item.id}>
+                    <div className='product_card'>
+                        <a href="#"><img src={item.imageUrl} className='logo' alt="Product" /></a>
+                        <h2>{item.nome}</h2>
+                        <p>{item.description}</p>
+                        <footer className='add_item'>
+                            <span>Adicionar item</span>
+                        </footer>
+                    </div>
                 </div>
-            </div>
-        
-    )
+            ))}
+        </div>
+    );
 }
 
 export default Product_card;

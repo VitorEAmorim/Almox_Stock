@@ -1,7 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app';
-import { getFirestore } from "firebase/firestore";
+import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-
 
 const firebaseConfig = {
     apiKey: "AIzaSyAqvLTLfL-aLxopzdhsA4zfueYrTTTtz7I",
@@ -14,15 +13,16 @@ const firebaseConfig = {
 };
 
 let app;
+
 if (!getApps().length) {
     app = initializeApp(firebaseConfig);
-    console.log("Firebase inicializado");
+    console.log("Firebase initialized");
 } else {
     app = getApps()[0];
-    console.log("Firebase já inicializado");
+    console.log("Firebase already initialized");
 }
 
-const auth = getAuth(app)
-const db = getFirestore(app)
+const db = getFirestore(app);
+const auth = getAuth(app);
 
 export { auth, db };

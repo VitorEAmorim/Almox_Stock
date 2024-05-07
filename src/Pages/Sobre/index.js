@@ -1,51 +1,53 @@
 import Header from "../Header";
 import { useState, useEffect } from "react";
 import { auth, db } from '../../firebase';
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+
 
 function Sobre() {
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const user = auth.currentUser;
-                if (user) {
-                    const uid = user.uid;
-                    const userDoc = await db.collection('users').doc(uid).get();
-                    if (userDoc.exists) {
-                        const userDataFromFirestore = userDoc.data(); // Obtenha os dados do Firestore
-                        setUserData(userDataFromFirestore); // Atualize o estado com os dados do Firestore
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                try {
+                    const userRef = doc(db, "users", user.uid); // Referência para o documento do usuário
+                    const userDoc = await getDoc(userRef); // Obtenção do documento
+                    if (userDoc.exists()) {
+                        setUserData(userDoc.data()); // Atualize o estado com os dados do Firestore
+                        console.log("Dados do usuário carregados: ", userDoc.data());
                     } else {
                         console.log('Documento do usuário não encontrado no Firestore');
                     }
-                } else {
-                    console.log('Nenhum usuário autenticado encontrado');
+                } catch (error) {
+                    console.error('Erro ao obter os dados do usuário:', error);
                 }
-            } catch (error) {
-                console.error('Erro ao obter os dados do usuário:', error);
+            } else {
+                console.log('Nenhum usuário autenticado encontrado');
+                setUserData(null); // Limpe os dados do usuário se não estiver logado
             }
-        };
+        });
 
-        fetchUserData();
+        return () => unsubscribe(); // Limpeza na desmontagem
     }, []);
 
     return (
         <div className="MainPage">
-            <Header/>
+            <Header />
             {userData ? (
-            <div>
-                <p>Nome: {userData.nome}</p>
-                <p>Sobrenome: {userData.sobrenome}</p>
-                <p>Data de Nascimento: {userData.dataNasc}</p>
-            </div>
+                <div>
+                    <p>Nome: {userData.nome}</p>
+                    <p>Sobrenome: {userData.sobrenome}</p>
+                    <p>Data de Nascimento: {userData.dataNasc}</p>
+                </div>
             ) : (
-            <p>Carregando dados do usuário...</p>
+                <p>Carregando dados do usuário...</p>
             )}
         </div>
+
+
     );
-
-
-        
-
 }
+
 export default Sobre;
