@@ -11,14 +11,6 @@ function Home () {
             <section className="section">   
                 <div className="catalogo_itens">
                     <Product_card/>
-                    <Product_card/>
-                    <Product_card/>
-                    <Product_card/>
-                    <Product_card/>
-                    <Product_card/>
-                    <Product_card/>
-                    <Product_card/>
-
                 </div>
             </section> 
         </div>
