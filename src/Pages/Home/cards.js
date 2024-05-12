@@ -26,7 +26,7 @@ const Product_card = () => {
     }, []);
 
     return (
-        <div>
+        <div className='catalogo_itens'>
             {items.map(item => (
                 <div className='card' key={item.id}>
                     <div className='product_card'>

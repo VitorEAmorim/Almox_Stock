@@ -1,5 +1,5 @@
 import Header from "../Header";
-import Product_card from './cards'
+import Product_card from './cards';
 import "./home.css";
 
 
@@ -8,11 +8,11 @@ function Home () {
     return (
         <div className="body">
             <Header/>
-            <section className="section">   
-                <div className="catalogo_itens">
+            <section className="section">
+                <div>
                     <Product_card/>
                 </div>
-            </section> 
+            </section>
         </div>
     )
 }

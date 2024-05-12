@@ -1,49 +1,28 @@
 import Header from "../Header";
-import { useState, useEffect } from "react";
-import { auth, db } from '../../firebase';
-import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { useState } from 'react';
+import useUserDataName from "../function/getDataName";
+import ItemAdd from "../function/add_item";
 
 
 function Sobre() {
-    const [userData, setUserData] = useState(null);
+    const Name = useState(useUserDataName.nome);
+    const Sobrenome = useState(useUserDataName.sobrenome);
+    const dataNasc = useState(useUserDataName.dataNasc);
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                try {
-                    const userRef = doc(db, "users", user.uid); // Referência para o documento do usuário
-                    const userDoc = await getDoc(userRef); // Obtenção do documento
-                    if (userDoc.exists()) {
-                        setUserData(userDoc.data()); // Atualize o estado com os dados do Firestore
-                        console.log("Dados do usuário carregados: ", userDoc.data());
-                    } else {
-                        console.log('Documento do usuário não encontrado no Firestore');
-                    }
-                } catch (error) {
-                    console.error('Erro ao obter os dados do usuário:', error);
-                }
-            } else {
-                console.log('Nenhum usuário autenticado encontrado');
-                setUserData(null); // Limpe os dados do usuário se não estiver logado
-            }
-        });
-
-        return () => unsubscribe(); // Limpeza na desmontagem
-    }, []);
 
     return (
         <div className="MainPage">
             <Header />
-            {userData ? (
+            {useUserDataName ? (
                 <div>
-                    <p>Nome: {userData.nome}</p>
-                    <p>Sobrenome: {userData.sobrenome}</p>
-                    <p>Data de Nascimento: {userData.dataNasc}</p>
+                    <p>Nome: {Name}</p>
+                    <p>Sobrenome: {Sobrenome}</p>
+                    <p>Data de Nascimento: {dataNasc}</p>
                 </div>
             ) : (
                 <p>Carregando dados do usuário...</p>
             )}
+            <ItemAdd />
         </div>
 
 

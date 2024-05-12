@@ -1,15 +1,15 @@
 
-.section{
-    display: inline-flex;
 
+.section {
+    display: inline-flex;
     padding: 0 2%;
 }
 
-.catalogo_itens {
+.catalogo_itens  {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+    flex-direction: row;
     gap: 20px;
     padding-left: 10px;
 }
-
