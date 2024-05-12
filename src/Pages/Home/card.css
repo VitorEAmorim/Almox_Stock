@@ -39,8 +39,9 @@
 
 .product_card img{
     padding:5px 15px;
-    min-width: 10%;
-    min-height: auto;
+    min-width: 200px;
+    min-height: 200px;
+    object-fit: contain;
 
 }
 
