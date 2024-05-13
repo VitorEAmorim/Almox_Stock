@@ -1,34 +1,33 @@
 import { useState } from "react";
 import { db } from '../../firebase';
-import { doc, setDoc, getDoc  } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
 export function ItemAdd () {
 
     const [nome, setNome] = useState('');
     const [description, setDescrition] = useState('');
     const [quantidade, setQuantidade] = useState(1);
-    const [imageUrl, setImageUrl] = useState('https://th.bing.com/th/id/OIP.lphx3rDiTcIP0sOCnIon0AHaFj?rs=1&pid=ImgDetMain');
-
-    const [status, setStatus] = useState(true);
+    const [imageUrl, setImageUrl] = useState('');
+    const [status] = useState(true);
     const [error, setError] = useState('');
 
+
     const handleCreate = async (event) => {
-        event.preventDefault();
-        try { 
-            const item = {"nome":nome,"description":description,"quantidade":quantidade, "status":status, "imageUrl":imageUrl};
-            await saveItemInFirebase(item.nome, item);
-            alert("O item foi criado com sucesso!")
-        } catch (error) {
-            setError(error.code);
-            alert("Ocorreu algum erro!")
+            event.preventDefault();
+            try {
+                const item = {"nome":nome,"description":description,"quantidade":quantidade, "status":status, "imageUrl":imageUrl};
+                await saveItemInFirebase(item);
+                alert("O item foi criado com sucesso!")
+            } catch (error) {
+                setError(error.code);
+                alert("Ocorreu algum erro!" + error.code)
 
-        }
-
+            }
     }
 
-    const saveItemInFirebase = async (nameItem, data) => {
+    const saveItemInFirebase = async (data) => {
         try {
-          await setDoc(doc(db, "itens", nameItem), data);
+          await addDoc(collection(db, "itens"), data);
         } catch (error) {
           throw new Error(error);
         }
@@ -39,22 +38,22 @@ export function ItemAdd () {
             <form className="create">
                 <div className="item">
                     <span>Nome: </span><br></br>
-                    <label><input type="text" maxLength={15} value={nome} onChange={(nome)=> setNome(nome.target.value)} required></input></label>
+                    <label><input required type="text" maxLength={15} value={nome} onChange={(nome)=> setNome(nome.target.value)}></input></label>
                 </div>
 
                 <div className="item">
                     <span>Descrição: </span><br></br>
-                    <label><input type="text" maxLength={45} value={description} onChange={(description)=> setDescrition(description.target.value)} required></input></label>
+                    <label><input required type="text" maxLength={45} value={description} onChange={(description)=> setDescrition(description.target.value)}></input></label>
                 </div>
 
                 <div className="item">
                     <span>Quantidade: </span><br></br>
-                    <label><input type="number"  value={quantidade} onChange={(quantidade)=> setQuantidade(quantidade.target.value)} required></input></label>
+                    <label><input required type="number"  value={quantidade} onChange={(quantidade)=> setQuantidade(quantidade.target.value)}></input></label>
                 </div>
 
                 <div className="item">
                     <span>Imagem: </span><br></br>
-                    <label><input type="url"  placeholder='Cole o link da imagem'value={imageUrl} onChange={(imageUrl)=> setImageUrl(imageUrl.currentTarget.value)} required></input></label>
+                    <label><input required type="url"  placeholder='Cole o link da imagem' value={imageUrl} onChange={(imageUrl)=> setImageUrl(imageUrl.target.value)}></input></label>
                 </div>
                 
                 <div className="button_nav">
