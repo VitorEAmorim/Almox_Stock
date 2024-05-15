@@ -3,13 +3,13 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAqvLTLfL-aLxopzdhsA4zfueYrTTTtz7I",
-    authDomain: "mini-wms-f28ea.firebaseapp.com",
-    projectId: "mini-wms-f28ea",
-    storageBucket: "mini-wms-f28ea.appspot.com",
-    messagingSenderId: "989791990100",
-    appId: "1:989791990100:web:5b9620fa1c13331d6758c1",
-    measurementId: "G-TCP2ZE70VT"
+    apiKey: process.env.NEXT_API_KEY,
+    authDomain: process.env.NEXT_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PROJECT_ID,
+    storageBucket: process.env.NEXT_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_APP_ID,
+    measurementId: process.env.NEXT_MEASUREMENT_ID
 };
 
 let app;
