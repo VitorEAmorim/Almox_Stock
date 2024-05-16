@@ -19,10 +19,10 @@ if (!getApps().length) {
     console.log("Firebase initialized");
 } else {
     app = getApps()[0];
+    console.log(firebaseConfig)
     console.log("Firebase already initialized");
 }
 
 const db = getFirestore(app);
 const auth = getAuth(app);
-
 export { auth, db };
