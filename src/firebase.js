@@ -12,7 +12,6 @@ const firebaseConfig = {
     measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
-console.log("Firebase Config:", firebaseConfig);
 
 let app;
 
@@ -20,7 +19,6 @@ if (!getApps().length) {
     app = initializeApp(firebaseConfig);
     console.log("Firebase initialized");
 } else {
-    app = getApps()[0];
     console.log("Firebase already initialized");
 }
 
