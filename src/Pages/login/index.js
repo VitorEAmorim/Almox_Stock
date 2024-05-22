@@ -69,7 +69,7 @@ export function Enter () {
             {error && <h4>{error}</h4>}
             <div className="forgot">
                 <Link to={"/register"}>Não tem uma conta?</Link>
-                <button type="submit" onClick={ handleLogin }></button>
+                <button className="button_login" type="submit" onClick={ handleLogin }>Entrar</button>
     
             <a href="#">Esqueceu o usuário?</a>
             </div>

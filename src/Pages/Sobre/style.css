@@ -1,0 +1,16 @@
+
+
+.formulario_item, .card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+.insert button{
+    font: 1em sans-serif;
+    display: block;
+    background: none;
+    border: 0;
+    width: 100%;
+}

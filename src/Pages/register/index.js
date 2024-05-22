@@ -63,27 +63,27 @@ export function Login () {
 
                 <div className="user">
                     <span>Nome: </span><br></br>
-                    <label><input type="text" value={nome} onChange={(nome)=> setNome(nome.target.value)}></input></label>
+                    <label><input type="text" value={nome} onChange={(nome)=> setNome(nome.target.value) } required></input></label>
                 </div>
 
                 <div className="user">
                     <span>Sobrenome: </span><br></br>
-                    <label><input type="text" value={Sobrenome} onChange={(Sobrenome)=> setSobrenome(Sobrenome.target.value)}></input></label>
+                    <label><input type="text" value={Sobrenome} onChange={(Sobrenome)=> setSobrenome(Sobrenome.target.value)} required></input></label>
                 </div>
 
                 <div className="user">
                     <span>Email: </span><br></br>
-                    <label><input type="email"  value={email} onChange={(email)=> setemail(email.target.value)}></input></label>
+                    <label><input type="email"  value={email} onChange={(email)=> setemail(email.target.value)} required></input></label>
                 </div>
 
                 <div className="user">
                     <span>Senha: </span><br></br>
-                    <label><input type="password" min={8}  value={senha} onChange={(senha)=> setSenha(senha.target.value)}></input></label>
+                    <label><input type="password" min={8}  value={senha} onChange={(senha)=> setSenha(senha.target.value)} required></input></label>
                 </div>
 
                 <div className="user">
                     <span>Data de Nascimento: </span><br></br>
-                    <label><input type="date" value={dataNasc} onChange={(dataNasc)=> setdataNasc(dataNasc.target.value)}></input></label>
+                    <label><input type="date" value={dataNasc} onChange={(dataNasc)=> setdataNasc(dataNasc.target.value)} required></input></label>
                 </div>
                 
             
